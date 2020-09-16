@@ -1,0 +1,31 @@
+{
+  "name": "product-catalog-backend",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.js",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
+    "mongoose": "^5.10.5",
+    "morgan": "^1.10.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "nodemon server.js",
+    "start": "node server.js",
+    "seed": "node run productSeedData.sj"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mbpod10/product-catalog-backend.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/mbpod10/product-catalog-backend/issues"
+  },
+  "homepage": "https://github.com/mbpod10/product-catalog-backend#readme"
+}
