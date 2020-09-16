@@ -27,4 +27,12 @@ router.put("/:id", (req, res) => {
     }
   );
 });
+
+router.post("/", (req, res) => {
+  Product.create({}, req.body, (error, product) => {
+    if (error) console.log(error);
+    else res.json(product);
+  });
+});
+
 module.exports = router;
