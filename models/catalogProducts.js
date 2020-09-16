@@ -5,6 +5,7 @@ const ProductSchema = new mongoose.Schema({
   imageUrl: String,
   price: Number,
   manufacturer: String,
+  reviews: [{ type: mongoose.Schema.Types.ObjectId, ref: "reviews" }],
 });
 
 const Product = mongoose.model("products", ProductSchema);

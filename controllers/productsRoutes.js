@@ -1,6 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const Product = require("../models/catalogProducts");
+const Review = require("../models/reviews");
 
 router.get("/", (req, res) => {
   Product.find({}, (error, products) => {
@@ -18,7 +19,7 @@ router.get("/:id", (req, res) => {
 
 router.put("/:id", (req, res) => {
   Product.findOneAndUpdate(
-    { _id: req.params.id },
+    { _id: req.params._id },
     req.body,
     { new: true },
     (error, product) => {
@@ -35,4 +36,25 @@ router.post("/", (req, res) => {
   });
 });
 
+router.get("/rev/reviews", (req, res) => {
+  Review.find({}, (error, reviews) => {
+    if (error) console.log(error);
+    else res.json(reviews);
+  });
+});
+
+router.delete("/", (req, res) => {
+  Product.deleteMany({}, (error, products) => {
+    if (error) console.log(error);
+    else res.json("Deleted Products");
+  });
+});
+
+router.get("/name/:name", (req, res) => {
+  Product.find({ name: req.params.name })
+    .populate("reviews")
+    .then((product) => {
+      res.json(product);
+    });
+});
 module.exports = router;
