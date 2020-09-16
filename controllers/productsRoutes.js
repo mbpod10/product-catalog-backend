@@ -19,7 +19,7 @@ router.get("/:id", (req, res) => {
 
 router.put("/:id", (req, res) => {
   Product.findOneAndUpdate(
-    { _id: req.params._id },
+    { _id: req.params.id },
     req.body,
     { new: true },
     (error, product) => {

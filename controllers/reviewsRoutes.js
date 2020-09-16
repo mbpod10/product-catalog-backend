@@ -41,4 +41,16 @@ router.put("/add/review/:id", (req, res) => {
   });
 });
 
+// edit by review id
+router.put("/edit/:id", (req, res) => {
+  Review.findOneAndUpdate(
+    { _id: req.params.id },
+    req.body,
+    { new: true },
+    (error, review) => {
+      if (error) console.log(error);
+      else res.json(review);
+    }
+  );
+});
 module.exports = router;
