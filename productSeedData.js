@@ -22,10 +22,6 @@ const main = async () => {
       title: faker.lorem.words(4),
       reviewBody: faker.lorem.words(15),
       date: faker.date.past(),
-      // rating: faker.random.number({
-      //   min: 0,
-      //   max: 5,
-      // }),
       rating: faker.finance.amount(0, 5, 1),
       ipAddresses: iP._id,
     });
