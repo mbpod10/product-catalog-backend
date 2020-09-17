@@ -52,7 +52,7 @@ router.put("/add/review/:id", (req, res) => {
               return element + index;
             });
             review.reviewCount = review.scores.length;
-            review.aveScore = sum / review.scores.length;
+            review.aveScore = (sum / review.scores.length).toFixed(1);
             // console.log(this.scores.length);
 
             review.save((error) => {

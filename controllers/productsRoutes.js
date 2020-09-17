@@ -4,25 +4,25 @@ const Product = require("../models/catalogProducts");
 const { find } = require("../models/reviews");
 const Review = require("../models/reviews");
 
-// router.get("/", (req, res) => {
-//   Product.find({})
-//     .populate({
-//       path: "reviews ipAddresses",
-//       populate: {
-//         path: "ipAddresses",
-//       },
-//     })
-//     .then((products) => {
-//       res.json(products);
-//     });
-// });
-
 router.get("/", (req, res) => {
-  Product.find({}, (error, products) => {
-    if (error) console.log(error);
-    else res.json(products);
-  });
+  Product.find({})
+    .populate({
+      path: "reviews ipAddresses",
+      populate: {
+        path: "ipAddresses",
+      },
+    })
+    .then((products) => {
+      res.json(products);
+    });
 });
+
+// router.get("/", (req, res) => {
+//   Product.find({}, (error, products) => {
+//     if (error) console.log(error);
+//     else res.json(products);
+//   });
+// });
 
 router.post("/", (req, res) => {
   Product.create(req.body, (error, food) => {
