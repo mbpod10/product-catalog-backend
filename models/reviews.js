@@ -6,7 +6,9 @@ const ReviewSchema = new mongoose.Schema({
   title: String,
   reviewBody: String,
   date: String,
+  // rating: { type: Number, default: 0 },
   rating: Number,
+  // ratingLength: Number,
   ipAddresses: [{ type: mongoose.Schema.Types.ObjectId, ref: "ipAddresses" }],
 });
 

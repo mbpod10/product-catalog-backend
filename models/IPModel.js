@@ -1,7 +1,8 @@
 const mongoose = require("../dbs/connection");
 
 const IPSchema = new mongoose.Schema({
-  address: String,
+  IPaddress: String,
+  server: String,
 });
 
 const IP = mongoose.model("ipAddresses", IPSchema);

@@ -5,7 +5,12 @@ const ProductSchema = new mongoose.Schema({
   imageUrl: String,
   price: Number,
   manufacturer: String,
-  reviews: [{ type: mongoose.Schema.Types.ObjectId, ref: "reviews" }],
+  aveScore: { type: Number, default: 0 },
+  reviews: [
+    { type: mongoose.Schema.Types.ObjectId, ref: "reviews", default: [] },
+  ],
+  scores: { type: Array, default: [] },
+  reviewCount: { type: Number, default: 0 },
 });
 
 const Product = mongoose.model("products", ProductSchema);

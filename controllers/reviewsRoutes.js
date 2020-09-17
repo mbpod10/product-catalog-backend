@@ -32,17 +32,35 @@ router.get("/title/:title", (req, res) => {
 // post new review based on product id
 router.put("/add/review/:id", (req, res) => {
   const review = new Review(req.body);
+  const rating = parseInt(req.body.rating, 10);
   review.save((error) => {
     if (error) console.log(error);
     else {
-      Product.findByIdAndUpdate(
-        req.params.id,
-        { $push: { reviews: review } },
+      Product.findOneAndUpdate(
+        { _id: req.params.id },
+        {
+          $push: { reviews: review, scores: rating },
+          // aveScore: { $avg: "scores" },
+          // $set: { reviewCount: 15 },
+          // $project: { reviewCount: { $size: reviews } },
+        },
         { new: true },
         (error, review) => {
           if (error) console.log(error);
           else {
-            res.json(review);
+            const sum = review.scores.reduce((element, index) => {
+              return element + index;
+            });
+            review.reviewCount = review.scores.length;
+            review.aveScore = sum / review.scores.length;
+            // console.log(this.scores.length);
+
+            review.save((error) => {
+              if (error) console.log(error);
+              else res.json(review);
+            });
+
+            // res.json(review);
           }
         }
       );
@@ -62,4 +80,14 @@ router.put("/edit/:id", (req, res) => {
     }
   );
 });
+
+//sort by highest rated products
+router.get("/highestrated", (req, res) => {
+  Review.find({})
+    .sort([["rating", -1]])
+    .then((reviews) => {
+      res.json(reviews);
+    });
+});
+
 module.exports = router;
