@@ -6,7 +6,8 @@ const ReviewSchema = new mongoose.Schema({
   title: String,
   reviewBody: String,
   date: String,
-  //   products: [{ type: mongoose.Schema.Types.ObjectId, ref: "products" }],
+  rating: Number,
+  ipAddresses: [{ type: mongoose.Schema.Types.ObjectId, ref: "ipAddresses" }],
 });
 
 const Review = mongoose.model("reviews", ReviewSchema);

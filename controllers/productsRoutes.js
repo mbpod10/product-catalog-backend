@@ -36,13 +36,6 @@ router.post("/", (req, res) => {
   });
 });
 
-router.get("/rev/reviews", (req, res) => {
-  Review.find({}, (error, reviews) => {
-    if (error) console.log(error);
-    else res.json(reviews);
-  });
-});
-
 router.delete("/", (req, res) => {
   Product.deleteMany({}, (error, products) => {
     if (error) console.log(error);
@@ -52,7 +45,12 @@ router.delete("/", (req, res) => {
 
 router.get("/name/:name", (req, res) => {
   Product.find({ name: req.params.name })
-    .populate("reviews")
+    .populate({
+      path: "reviews ipAddresses",
+      populate: {
+        path: "ipAddresses",
+      },
+    })
     .then((product) => {
       res.json(product);
     });

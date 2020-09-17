@@ -3,6 +3,7 @@ const express = require("express");
 const router = express.Router();
 const Review = require("../models/reviews");
 const Product = require("../models/catalogProducts");
+const IP = require("../models/IPModel");
 
 // get all reviews
 router.get("/", (req, res) => {
@@ -18,6 +19,14 @@ router.delete("/", (req, res) => {
     if (error) console.log(error);
     else res.json("Deleted Reviews");
   });
+});
+
+router.get("/title/:title", (req, res) => {
+  Review.find({ title: req.params.title })
+    .populate("ipAddresses")
+    .then((review) => {
+      res.json(review);
+    });
 });
 
 // post new review based on product id
